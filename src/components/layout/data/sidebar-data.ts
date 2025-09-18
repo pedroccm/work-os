@@ -21,6 +21,7 @@ import {
   AudioWaveform,
   Command,
   GalleryVerticalEnd,
+  Database,
 } from 'lucide-react'
 import { ClerkLogo } from '@/assets/clerk-logo'
 import { type SidebarData } from '../types'
@@ -77,6 +78,16 @@ export const sidebarData: SidebarData = {
           title: 'Users',
           url: '/users',
           icon: Users,
+        },
+        {
+          title: 'Supabase Test',
+          url: '/supabase-test',
+          icon: Database,
+        },
+        {
+          title: 'Dashboard Supabase',
+          url: '/dashboard-supabase-test',
+          icon: Database,
         },
         {
           title: 'Secured by Clerk',

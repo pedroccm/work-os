@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TestWorkingRouteImport } from './routes/test-working'
+import { Route as TestSupabaseRouteImport } from './routes/test-supabase'
 import { Route as ClerkRouteRouteImport } from './routes/clerk/route'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
@@ -27,8 +29,10 @@ import { Route as ClerkauthRouteRouteImport } from './routes/clerk/(auth)/route'
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
 import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
+import { Route as AuthenticatedSupabaseTestIndexRouteImport } from './routes/_authenticated/supabase-test/index'
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
+import { Route as AuthenticatedDashboardSupabaseTestIndexRouteImport } from './routes/_authenticated/dashboard-supabase-test/index'
 import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
 import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authenticated/apps/index'
 import { Route as ClerkAuthenticatedUserManagementRouteImport } from './routes/clerk/_authenticated/user-management'
@@ -40,6 +44,16 @@ import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_a
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
 
+const TestWorkingRoute = TestWorkingRouteImport.update({
+  id: '/test-working',
+  path: '/test-working',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestSupabaseRoute = TestSupabaseRouteImport.update({
+  id: '/test-supabase',
+  path: '/test-supabase',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ClerkRouteRoute = ClerkRouteRouteImport.update({
   id: '/clerk',
   path: '/clerk',
@@ -128,6 +142,12 @@ const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexRouteImport.update({
   path: '/tasks/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSupabaseTestIndexRoute =
+  AuthenticatedSupabaseTestIndexRouteImport.update({
+    id: '/supabase-test/',
+    path: '/supabase-test/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSettingsIndexRoute =
   AuthenticatedSettingsIndexRouteImport.update({
     id: '/',
@@ -138,6 +158,12 @@ const AuthenticatedHelpCenterIndexRoute =
   AuthenticatedHelpCenterIndexRouteImport.update({
     id: '/help-center/',
     path: '/help-center/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardSupabaseTestIndexRoute =
+  AuthenticatedDashboardSupabaseTestIndexRouteImport.update({
+    id: '/dashboard-supabase-test/',
+    path: '/dashboard-supabase-test/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexRouteImport.update({
@@ -199,6 +225,8 @@ const AuthenticatedErrorsErrorRoute =
 
 export interface FileRoutesByFullPath {
   '/clerk': typeof ClerkAuthenticatedRouteRouteWithChildren
+  '/test-supabase': typeof TestSupabaseRoute
+  '/test-working': typeof TestWorkingRoute
   '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/clerk/': typeof ClerkauthRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
@@ -222,12 +250,16 @@ export interface FileRoutesByFullPath {
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
+  '/dashboard-supabase-test': typeof AuthenticatedDashboardSupabaseTestIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
+  '/supabase-test': typeof AuthenticatedSupabaseTestIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
 }
 export interface FileRoutesByTo {
+  '/test-supabase': typeof TestSupabaseRoute
+  '/test-working': typeof TestWorkingRoute
   '/clerk': typeof ClerkAuthenticatedRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
   '/otp': typeof authOtpRoute
@@ -250,8 +282,10 @@ export interface FileRoutesByTo {
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
+  '/dashboard-supabase-test': typeof AuthenticatedDashboardSupabaseTestIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
+  '/supabase-test': typeof AuthenticatedSupabaseTestIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
 }
@@ -259,6 +293,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/clerk': typeof ClerkRouteRouteWithChildren
+  '/test-supabase': typeof TestSupabaseRoute
+  '/test-working': typeof TestWorkingRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/clerk/(auth)': typeof ClerkauthRouteRouteWithChildren
   '/clerk/_authenticated': typeof ClerkAuthenticatedRouteRouteWithChildren
@@ -283,8 +319,10 @@ export interface FileRoutesById {
   '/clerk/_authenticated/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
+  '/_authenticated/dashboard-supabase-test/': typeof AuthenticatedDashboardSupabaseTestIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
+  '/_authenticated/supabase-test/': typeof AuthenticatedSupabaseTestIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
 }
@@ -292,6 +330,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/clerk'
+    | '/test-supabase'
+    | '/test-working'
     | '/settings'
     | '/clerk/'
     | '/forgot-password'
@@ -315,12 +355,16 @@ export interface FileRouteTypes {
     | '/clerk/user-management'
     | '/apps'
     | '/chats'
+    | '/dashboard-supabase-test'
     | '/help-center'
     | '/settings/'
+    | '/supabase-test'
     | '/tasks'
     | '/users'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/test-supabase'
+    | '/test-working'
     | '/clerk'
     | '/forgot-password'
     | '/otp'
@@ -343,14 +387,18 @@ export interface FileRouteTypes {
     | '/clerk/user-management'
     | '/apps'
     | '/chats'
+    | '/dashboard-supabase-test'
     | '/help-center'
     | '/settings'
+    | '/supabase-test'
     | '/tasks'
     | '/users'
   id:
     | '__root__'
     | '/_authenticated'
     | '/clerk'
+    | '/test-supabase'
+    | '/test-working'
     | '/_authenticated/settings'
     | '/clerk/(auth)'
     | '/clerk/_authenticated'
@@ -375,8 +423,10 @@ export interface FileRouteTypes {
     | '/clerk/_authenticated/user-management'
     | '/_authenticated/apps/'
     | '/_authenticated/chats/'
+    | '/_authenticated/dashboard-supabase-test/'
     | '/_authenticated/help-center/'
     | '/_authenticated/settings/'
+    | '/_authenticated/supabase-test/'
     | '/_authenticated/tasks/'
     | '/_authenticated/users/'
   fileRoutesById: FileRoutesById
@@ -384,6 +434,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   ClerkRouteRoute: typeof ClerkRouteRouteWithChildren
+  TestSupabaseRoute: typeof TestSupabaseRoute
+  TestWorkingRoute: typeof TestWorkingRoute
   authForgotPasswordRoute: typeof authForgotPasswordRoute
   authOtpRoute: typeof authOtpRoute
   authSignInRoute: typeof authSignInRoute
@@ -398,6 +450,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/test-working': {
+      id: '/test-working'
+      path: '/test-working'
+      fullPath: '/test-working'
+      preLoaderRoute: typeof TestWorkingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/test-supabase': {
+      id: '/test-supabase'
+      path: '/test-supabase'
+      fullPath: '/test-supabase'
+      preLoaderRoute: typeof TestSupabaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/clerk': {
       id: '/clerk'
       path: '/clerk'
@@ -524,6 +590,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTasksIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/supabase-test/': {
+      id: '/_authenticated/supabase-test/'
+      path: '/supabase-test'
+      fullPath: '/supabase-test'
+      preLoaderRoute: typeof AuthenticatedSupabaseTestIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings/': {
       id: '/_authenticated/settings/'
       path: '/'
@@ -536,6 +609,13 @@ declare module '@tanstack/react-router' {
       path: '/help-center'
       fullPath: '/help-center'
       preLoaderRoute: typeof AuthenticatedHelpCenterIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard-supabase-test/': {
+      id: '/_authenticated/dashboard-supabase-test/'
+      path: '/dashboard-supabase-test'
+      fullPath: '/dashboard-supabase-test'
+      preLoaderRoute: typeof AuthenticatedDashboardSupabaseTestIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/chats/': {
@@ -640,7 +720,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
+  AuthenticatedDashboardSupabaseTestIndexRoute: typeof AuthenticatedDashboardSupabaseTestIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
+  AuthenticatedSupabaseTestIndexRoute: typeof AuthenticatedSupabaseTestIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
 }
@@ -651,7 +733,10 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
+  AuthenticatedDashboardSupabaseTestIndexRoute:
+    AuthenticatedDashboardSupabaseTestIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
+  AuthenticatedSupabaseTestIndexRoute: AuthenticatedSupabaseTestIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
 }
@@ -705,6 +790,8 @@ const ClerkRouteRouteWithChildren = ClerkRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   ClerkRouteRoute: ClerkRouteRouteWithChildren,
+  TestSupabaseRoute: TestSupabaseRoute,
+  TestWorkingRoute: TestWorkingRoute,
   authForgotPasswordRoute: authForgotPasswordRoute,
   authOtpRoute: authOtpRoute,
   authSignInRoute: authSignInRoute,

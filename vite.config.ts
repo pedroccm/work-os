@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     tanstackRouter({
       target: 'react',
-      autoCodeSplitting: true,
+      autoCodeSplitting: process.env.NODE_ENV === 'production',
     }),
     react(),
     tailwindcss(),

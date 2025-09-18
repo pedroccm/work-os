@@ -13,6 +13,18 @@ dist-ssr
 *.local
 
 .env
+.env.local
+.env.production
+
+# Arquivos de backup/teste criados durante desenvolvimento
+vite.config.backup.ts
+vite.config.simple.ts
+test-simple.html
+test-minimal.html
+teste_supabase.ipynb
+
+# Pasta shadcn-admin (repositório separado)
+shadcn-admin/
 
 # Editor directories and files
 .vscode/*
