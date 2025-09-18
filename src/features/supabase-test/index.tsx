@@ -152,7 +152,7 @@ export default function SupabaseTest() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {tables.map((table, index) => (
+                {tables.map((table) => (
                   <TableRow key={`${table.table_schema}.${table.table_name}`}>
                     <TableCell className="font-medium">{table.table_name}</TableCell>
                     <TableCell>

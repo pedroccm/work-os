@@ -199,7 +199,7 @@ function TestSupabasePage() {
               <tbody>
                 {users.map((user, index) => (
                   <tr key={index} style={{
-                    ':hover': { backgroundColor: '#f9fafb' }
+                    backgroundColor: 'transparent'
                   }}>
                     {Object.values(user).map((value, idx) => (
                       <td key={idx} style={{

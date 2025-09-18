@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { supabase } from '@/lib/supabase'
 
@@ -13,7 +13,7 @@ export default function SafeSupabaseTest() {
     setResult('')
 
     try {
-      const { data, error } = await supabase.auth.getSession()
+      const { error } = await supabase.auth.getSession()
 
       if (error) {
         setResult(`❌ Erro: ${error.message}`)

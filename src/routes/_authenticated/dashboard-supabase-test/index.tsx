@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Loader2, Database, CheckCircle, XCircle, RefreshCw, Activity } from 'lucide-react'
+import { Loader2, Database, CheckCircle, RefreshCw, Activity } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 function DashboardSupabaseTest() {

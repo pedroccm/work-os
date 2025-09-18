@@ -14,7 +14,7 @@ export interface DatabaseTable {
 export async function testConnection() {
   try {
     // Usar uma consulta que bypass policies RLS problemáticas
-    const { data, error } = await supabase.auth.getSession()
+    const { error } = await supabase.auth.getSession()
 
     if (error) {
       return { success: false, error: error.message }
@@ -48,7 +48,7 @@ export async function getTables(): Promise<{ success: boolean; data?: DatabaseTa
     for (const tableName of realTables) {
       try {
         // Consulta simples para verificar acesso
-        const { data, error } = await supabase
+        const { error } = await supabase
           .from(tableName)
           .select('*')
           .limit(1)
