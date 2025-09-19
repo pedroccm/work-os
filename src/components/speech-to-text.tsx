@@ -28,6 +28,7 @@ export function SpeechToText({
   const [isListening, setIsListening] = useState(false)
   const [transcript, setTranscript] = useState('')
   const [isSupported, setIsSupported] = useState(false)
+  const [, setInterimTranscript] = useState('')
   const recognitionRef = useRef<any>(null)
 
   useEffect(() => {

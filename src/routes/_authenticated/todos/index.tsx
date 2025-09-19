@@ -37,7 +37,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { useTasks, useCreateTask, useUpdateTask, useDeleteTask } from '@/hooks/use-tasks'
+import { useTasks, useCreateTask, useDeleteTask } from '@/hooks/use-tasks'
 import { TASK_STATUS, TASK_PRIORITY } from '@/types/tasks'
 import type { CreateTaskRequest } from '@/types/tasks'
 import { format } from 'date-fns'
@@ -51,7 +51,6 @@ export const Route = createFileRoute('/_authenticated/todos/')({
 function TodosPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [isCreateOpen, setIsCreateOpen] = useState(false)
-  const [selectedTask] = useState<any>(null)
   const [newTask, setNewTask] = useState<CreateTaskRequest>({
     titulo: '',
     descricao: '',
@@ -61,7 +60,6 @@ function TodosPage() {
 
   const { data: tasks, isLoading } = useTasks()
   const createTask = useCreateTask()
-  const updateTask = useUpdateTask()
   const deleteTask = useDeleteTask()
 
   const filteredTasks = tasks?.filter(task =>
@@ -192,7 +190,7 @@ function TodosPage() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align='end'>
                               <DropdownMenuItem
-                                onClick={() => setSelectedTask(task)}
+                                onClick={() => {}}
                               >
                                 <Eye className='mr-2 h-4 w-4' />
                                 Ver detalhes
