@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Plus, Settings, Users, Trash2, Edit, MoreHorizontal, UserPlus } from 'lucide-react'
+import { Plus, Users, Trash2, Edit, MoreHorizontal, UserPlus } from 'lucide-react'
 import { useTeams, useCreateTeam, useUpdateTeam, useDeleteTeam, useTeamMembers, useAddTeamMember, useRemoveTeamMember } from '@/hooks/use-teams'
 import { useState } from 'react'
 import {

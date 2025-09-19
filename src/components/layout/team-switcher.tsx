@@ -37,7 +37,7 @@ export function TeamSwitcher() {
   const { isMobile } = useSidebar()
   const navigate = useNavigate()
   const { data: teams, isLoading, error } = useTeams()
-  const { activeTeamId, setActiveTeamId, activeTeam } = useActiveTeam()
+  const { setActiveTeamId, activeTeam } = useActiveTeam()
   const createTeam = useCreateTeam()
   const [isAddTeamOpen, setIsAddTeamOpen] = React.useState(false)
   const [newTeam, setNewTeam] = React.useState({

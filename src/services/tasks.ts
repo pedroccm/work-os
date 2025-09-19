@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase'
-import type { Task, CreateTaskRequest, UpdateTaskRequest } from '@/types/tasks'
+import type { CreateTaskRequest, UpdateTaskRequest } from '@/types/tasks'
 
 export const tasksService = {
   async getTasks(teamId: string) {

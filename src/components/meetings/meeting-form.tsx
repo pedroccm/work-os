@@ -38,7 +38,7 @@ const meetingSchema = z.object({
   nome: z.string().min(3, "Nome deve ter pelo menos 3 caracteres"),
   descricao: z.string().optional(),
   data_reuniao: z.date({
-    required_error: "Data é obrigatória",
+    message: "Data é obrigatória",
   }),
   hora_inicio: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Formato inválido (HH:MM)"),
   hora_fim: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Formato inválido (HH:MM)"),

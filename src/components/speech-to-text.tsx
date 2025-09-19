@@ -21,7 +21,6 @@ declare global {
 
 export function SpeechToText({
   onTranscript,
-  placeholder = 'Clique no microfone para começar a falar...',
   language = 'pt-BR',
   continuous = true,
   autoStart = false
@@ -29,7 +28,6 @@ export function SpeechToText({
   const [isListening, setIsListening] = useState(false)
   const [transcript, setTranscript] = useState('')
   const [isSupported, setIsSupported] = useState(false)
-  const [interimTranscript, setInterimTranscript] = useState('')
   const recognitionRef = useRef<any>(null)
 
   useEffect(() => {

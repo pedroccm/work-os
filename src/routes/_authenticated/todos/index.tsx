@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-import { Plus, Search, MoreHorizontal, Calendar, User, Flag, Eye } from 'lucide-react'
+import { Plus, Search, MoreHorizontal, Eye } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -51,7 +51,7 @@ export const Route = createFileRoute('/_authenticated/todos/')({
 function TodosPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [isCreateOpen, setIsCreateOpen] = useState(false)
-  const [selectedTask, setSelectedTask] = useState<any>(null)
+  const [selectedTask] = useState<any>(null)
   const [newTask, setNewTask] = useState<CreateTaskRequest>({
     titulo: '',
     descricao: '',
@@ -169,12 +169,12 @@ function TodosPage() {
                         </TableCell>
                         <TableCell>
                           <Badge variant={getStatusColor(task.status)}>
-                            {TASK_STATUS[task.status]}
+                            {TASK_STATUS[task.status as keyof typeof TASK_STATUS]}
                           </Badge>
                         </TableCell>
                         <TableCell>
                           <Badge variant={getPriorityColor(task.prioridade)}>
-                            {TASK_PRIORITY[task.prioridade]}
+                            {TASK_PRIORITY[task.prioridade as keyof typeof TASK_PRIORITY]}
                           </Badge>
                         </TableCell>
                         <TableCell>

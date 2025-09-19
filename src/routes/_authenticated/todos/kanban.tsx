@@ -151,7 +151,7 @@ export function KanbanView() {
                         className='text-xs'
                       >
                         <Flag className='mr-1 h-3 w-3' />
-                        {TASK_PRIORITY[task.prioridade]}
+                        {TASK_PRIORITY[task.prioridade as keyof typeof TASK_PRIORITY]}
                       </Badge>
 
                       {task.data_vencimento && (
