@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Plus, Video, Calendar, Clock, Edit, Trash2, Search } from "lucide-react";
+import { Plus, Video, Calendar, Clock, SquarePen, Trash2, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,12 +12,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { useMeetings } from "@/hooks/use-meetings";
 import { format } from "date-fns";
@@ -80,7 +74,6 @@ function MeetingsPage() {
                   <TableHead>Nome</TableHead>
                   <TableHead>Data</TableHead>
                   <TableHead>Horário</TableHead>
-                  <TableHead>Status</TableHead>
                   <TableHead>Vídeo</TableHead>
                   <TableHead>Transcrição</TableHead>
                   <TableHead className="text-right">Ações</TableHead>
@@ -101,13 +94,8 @@ function MeetingsPage() {
                     <TableCell>
                       <div className="flex items-center">
                         <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
-                        {meeting.hora_inicio} - {meeting.hora_fim}
+                        {meeting.hora_inicio}
                       </div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={meeting.status === 'finalizada' ? 'secondary' : 'default'}>
-                        {meeting.status}
-                      </Badge>
                     </TableCell>
                     <TableCell>
                       {meeting.video_youtube && (
@@ -127,28 +115,23 @@ function MeetingsPage() {
                       )}
                     </TableCell>
                     <TableCell className="text-right">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="sm">
-                            •••
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem
-                            onClick={() => navigate({ to: `/meetings/${meeting.id}/edit` })}
-                          >
-                            <Edit className="mr-2 h-4 w-4" />
-                            Editar
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => handleDelete(meeting.id)}
-                            className="text-destructive"
-                          >
-                            <Trash2 className="mr-2 h-4 w-4" />
-                            Excluir
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                      <div className="flex items-center justify-end gap-2">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => navigate({ to: `/meetings/${meeting.id}/edit` })}
+                        >
+                          <SquarePen className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDelete(meeting.id)}
+                          className="text-destructive hover:text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}

@@ -15,13 +15,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -41,12 +34,11 @@ const meetingSchema = z.object({
     message: "Data é obrigatória",
   }),
   hora_inicio: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Formato inválido (HH:MM)"),
-  hora_fim: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Formato inválido (HH:MM)"),
+  hora_fim: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Formato inválido (HH:MM)").optional().or(z.literal("")),
   video_youtube: z.string().url("URL inválida").optional().or(z.literal("")),
   video_youtube_id: z.string().optional(),
   resumo: z.string().optional(),
   transcript: z.string().optional(),
-  status: z.enum(["planejada", "em_andamento", "finalizada", "cancelada"]),
 });
 
 type MeetingFormData = z.infer<typeof meetingSchema>;
@@ -72,7 +64,6 @@ export function MeetingForm({ meeting }: MeetingFormProps) {
       video_youtube_id: meeting?.video_youtube_id || "",
       resumo: meeting?.resumo || "",
       transcript: meeting?.transcript || "",
-      status: meeting?.status || "planejada",
     },
   });
 
@@ -87,8 +78,10 @@ export function MeetingForm({ meeting }: MeetingFormProps) {
     try {
       const submitData = {
         ...data,
+        hora_fim: data.hora_fim || "",
         video_youtube_id: data.video_youtube ? extractYoutubeId(data.video_youtube) : "",
         data_reuniao: format(data.data_reuniao, "yyyy-MM-dd"),
+        status: "planejada" as const,
       };
 
       if (meeting) {
@@ -108,45 +101,19 @@ export function MeetingForm({ meeting }: MeetingFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormField
-            control={form.control}
-            name="nome"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nome da Reunião</FormLabel>
-                <FormControl>
-                  <Input placeholder="Ex: Reunião de Planejamento" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="status"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Status</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Selecione o status" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="planejada">Planejada</SelectItem>
-                    <SelectItem value="em_andamento">Em Andamento</SelectItem>
-                    <SelectItem value="finalizada">Finalizada</SelectItem>
-                    <SelectItem value="cancelada">Cancelada</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        <FormField
+          control={form.control}
+          name="nome"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Nome da Reunião</FormLabel>
+              <FormControl>
+                <Input placeholder="Ex: Reunião de Planejamento" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <FormField
           control={form.control}
