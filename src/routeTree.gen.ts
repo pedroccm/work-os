@@ -31,7 +31,6 @@ import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authentic
 import { Route as AuthenticatedSupabaseTestIndexRouteImport } from './routes/_authenticated/supabase-test/index'
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
 import { Route as AuthenticatedMeetingsIndexRouteImport } from './routes/_authenticated/meetings/index'
-import { Route as AuthenticatedLogsIndexRouteImport } from './routes/_authenticated/logs/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
 import { Route as AuthenticatedDashboardSupabaseTestIndexRouteImport } from './routes/_authenticated/dashboard-supabase-test/index'
 import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
@@ -41,10 +40,8 @@ import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_auth
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
 import { Route as AuthenticatedMeetingsNewRouteImport } from './routes/_authenticated/meetings/new'
-import { Route as AuthenticatedLogsNewRouteImport } from './routes/_authenticated/logs/new'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
 import { Route as AuthenticatedMeetingsMeetingIdEditRouteImport } from './routes/_authenticated/meetings/$meetingId.edit'
-import { Route as AuthenticatedLogsLogIdEditRouteImport } from './routes/_authenticated/logs/$logId.edit'
 
 const TestWorkingRoute = TestWorkingRouteImport.update({
   id: '/test-working',
@@ -159,11 +156,6 @@ const AuthenticatedMeetingsIndexRoute =
     path: '/meetings/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedLogsIndexRoute = AuthenticatedLogsIndexRouteImport.update({
-  id: '/logs/',
-  path: '/logs/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedHelpCenterIndexRoute =
   AuthenticatedHelpCenterIndexRouteImport.update({
     id: '/help-center/',
@@ -216,11 +208,6 @@ const AuthenticatedMeetingsNewRoute =
     path: '/meetings/new',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedLogsNewRoute = AuthenticatedLogsNewRouteImport.update({
-  id: '/logs/new',
-  path: '/logs/new',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedErrorsErrorRoute =
   AuthenticatedErrorsErrorRouteImport.update({
     id: '/errors/$error',
@@ -231,12 +218,6 @@ const AuthenticatedMeetingsMeetingIdEditRoute =
   AuthenticatedMeetingsMeetingIdEditRouteImport.update({
     id: '/meetings/$meetingId/edit',
     path: '/meetings/$meetingId/edit',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedLogsLogIdEditRoute =
-  AuthenticatedLogsLogIdEditRouteImport.update({
-    id: '/logs/$logId/edit',
-    path: '/logs/$logId/edit',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -256,7 +237,6 @@ export interface FileRoutesByFullPath {
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
-  '/logs/new': typeof AuthenticatedLogsNewRoute
   '/meetings/new': typeof AuthenticatedMeetingsNewRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
@@ -266,7 +246,6 @@ export interface FileRoutesByFullPath {
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/dashboard-supabase-test': typeof AuthenticatedDashboardSupabaseTestIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
-  '/logs': typeof AuthenticatedLogsIndexRoute
   '/meetings': typeof AuthenticatedMeetingsIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/supabase-test': typeof AuthenticatedSupabaseTestIndexRoute
@@ -274,7 +253,6 @@ export interface FileRoutesByFullPath {
   '/teams': typeof AuthenticatedTeamsIndexRoute
   '/todos': typeof AuthenticatedTodosIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
-  '/logs/$logId/edit': typeof AuthenticatedLogsLogIdEditRoute
   '/meetings/$meetingId/edit': typeof AuthenticatedMeetingsMeetingIdEditRoute
 }
 export interface FileRoutesByTo {
@@ -292,7 +270,6 @@ export interface FileRoutesByTo {
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
-  '/logs/new': typeof AuthenticatedLogsNewRoute
   '/meetings/new': typeof AuthenticatedMeetingsNewRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
@@ -302,7 +279,6 @@ export interface FileRoutesByTo {
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/dashboard-supabase-test': typeof AuthenticatedDashboardSupabaseTestIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
-  '/logs': typeof AuthenticatedLogsIndexRoute
   '/meetings': typeof AuthenticatedMeetingsIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/supabase-test': typeof AuthenticatedSupabaseTestIndexRoute
@@ -310,7 +286,6 @@ export interface FileRoutesByTo {
   '/teams': typeof AuthenticatedTeamsIndexRoute
   '/todos': typeof AuthenticatedTodosIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
-  '/logs/$logId/edit': typeof AuthenticatedLogsLogIdEditRoute
   '/meetings/$meetingId/edit': typeof AuthenticatedMeetingsMeetingIdEditRoute
 }
 export interface FileRoutesById {
@@ -331,7 +306,6 @@ export interface FileRoutesById {
   '/(errors)/503': typeof errors503Route
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
-  '/_authenticated/logs/new': typeof AuthenticatedLogsNewRoute
   '/_authenticated/meetings/new': typeof AuthenticatedMeetingsNewRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
@@ -341,7 +315,6 @@ export interface FileRoutesById {
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
   '/_authenticated/dashboard-supabase-test/': typeof AuthenticatedDashboardSupabaseTestIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
-  '/_authenticated/logs/': typeof AuthenticatedLogsIndexRoute
   '/_authenticated/meetings/': typeof AuthenticatedMeetingsIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/supabase-test/': typeof AuthenticatedSupabaseTestIndexRoute
@@ -349,7 +322,6 @@ export interface FileRoutesById {
   '/_authenticated/teams/': typeof AuthenticatedTeamsIndexRoute
   '/_authenticated/todos/': typeof AuthenticatedTodosIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
-  '/_authenticated/logs/$logId/edit': typeof AuthenticatedLogsLogIdEditRoute
   '/_authenticated/meetings/$meetingId/edit': typeof AuthenticatedMeetingsMeetingIdEditRoute
 }
 export interface FileRouteTypes {
@@ -370,7 +342,6 @@ export interface FileRouteTypes {
     | '/503'
     | '/'
     | '/errors/$error'
-    | '/logs/new'
     | '/meetings/new'
     | '/settings/account'
     | '/settings/appearance'
@@ -380,7 +351,6 @@ export interface FileRouteTypes {
     | '/chats'
     | '/dashboard-supabase-test'
     | '/help-center'
-    | '/logs'
     | '/meetings'
     | '/settings/'
     | '/supabase-test'
@@ -388,7 +358,6 @@ export interface FileRouteTypes {
     | '/teams'
     | '/todos'
     | '/users'
-    | '/logs/$logId/edit'
     | '/meetings/$meetingId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -406,7 +375,6 @@ export interface FileRouteTypes {
     | '/503'
     | '/'
     | '/errors/$error'
-    | '/logs/new'
     | '/meetings/new'
     | '/settings/account'
     | '/settings/appearance'
@@ -416,7 +384,6 @@ export interface FileRouteTypes {
     | '/chats'
     | '/dashboard-supabase-test'
     | '/help-center'
-    | '/logs'
     | '/meetings'
     | '/settings'
     | '/supabase-test'
@@ -424,7 +391,6 @@ export interface FileRouteTypes {
     | '/teams'
     | '/todos'
     | '/users'
-    | '/logs/$logId/edit'
     | '/meetings/$meetingId/edit'
   id:
     | '__root__'
@@ -444,7 +410,6 @@ export interface FileRouteTypes {
     | '/(errors)/503'
     | '/_authenticated/'
     | '/_authenticated/errors/$error'
-    | '/_authenticated/logs/new'
     | '/_authenticated/meetings/new'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
@@ -454,7 +419,6 @@ export interface FileRouteTypes {
     | '/_authenticated/chats/'
     | '/_authenticated/dashboard-supabase-test/'
     | '/_authenticated/help-center/'
-    | '/_authenticated/logs/'
     | '/_authenticated/meetings/'
     | '/_authenticated/settings/'
     | '/_authenticated/supabase-test/'
@@ -462,7 +426,6 @@ export interface FileRouteTypes {
     | '/_authenticated/teams/'
     | '/_authenticated/todos/'
     | '/_authenticated/users/'
-    | '/_authenticated/logs/$logId/edit'
     | '/_authenticated/meetings/$meetingId/edit'
   fileRoutesById: FileRoutesById
 }
@@ -638,13 +601,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMeetingsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/logs/': {
-      id: '/_authenticated/logs/'
-      path: '/logs'
-      fullPath: '/logs'
-      preLoaderRoute: typeof AuthenticatedLogsIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/help-center/': {
       id: '/_authenticated/help-center/'
       path: '/help-center'
@@ -708,13 +664,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMeetingsNewRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/logs/new': {
-      id: '/_authenticated/logs/new'
-      path: '/logs/new'
-      fullPath: '/logs/new'
-      preLoaderRoute: typeof AuthenticatedLogsNewRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/errors/$error': {
       id: '/_authenticated/errors/$error'
       path: '/errors/$error'
@@ -727,13 +676,6 @@ declare module '@tanstack/react-router' {
       path: '/meetings/$meetingId/edit'
       fullPath: '/meetings/$meetingId/edit'
       preLoaderRoute: typeof AuthenticatedMeetingsMeetingIdEditRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/logs/$logId/edit': {
-      id: '/_authenticated/logs/$logId/edit'
-      path: '/logs/$logId/edit'
-      fullPath: '/logs/$logId/edit'
-      preLoaderRoute: typeof AuthenticatedLogsLogIdEditRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
   }
@@ -766,20 +708,17 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
-  AuthenticatedLogsNewRoute: typeof AuthenticatedLogsNewRoute
   AuthenticatedMeetingsNewRoute: typeof AuthenticatedMeetingsNewRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
   AuthenticatedDashboardSupabaseTestIndexRoute: typeof AuthenticatedDashboardSupabaseTestIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
-  AuthenticatedLogsIndexRoute: typeof AuthenticatedLogsIndexRoute
   AuthenticatedMeetingsIndexRoute: typeof AuthenticatedMeetingsIndexRoute
   AuthenticatedSupabaseTestIndexRoute: typeof AuthenticatedSupabaseTestIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedTeamsIndexRoute: typeof AuthenticatedTeamsIndexRoute
   AuthenticatedTodosIndexRoute: typeof AuthenticatedTodosIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
-  AuthenticatedLogsLogIdEditRoute: typeof AuthenticatedLogsLogIdEditRoute
   AuthenticatedMeetingsMeetingIdEditRoute: typeof AuthenticatedMeetingsMeetingIdEditRoute
 }
 
@@ -787,21 +726,18 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
-  AuthenticatedLogsNewRoute: AuthenticatedLogsNewRoute,
   AuthenticatedMeetingsNewRoute: AuthenticatedMeetingsNewRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
   AuthenticatedDashboardSupabaseTestIndexRoute:
     AuthenticatedDashboardSupabaseTestIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
-  AuthenticatedLogsIndexRoute: AuthenticatedLogsIndexRoute,
   AuthenticatedMeetingsIndexRoute: AuthenticatedMeetingsIndexRoute,
   AuthenticatedSupabaseTestIndexRoute: AuthenticatedSupabaseTestIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedTeamsIndexRoute: AuthenticatedTeamsIndexRoute,
   AuthenticatedTodosIndexRoute: AuthenticatedTodosIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
-  AuthenticatedLogsLogIdEditRoute: AuthenticatedLogsLogIdEditRoute,
   AuthenticatedMeetingsMeetingIdEditRoute:
     AuthenticatedMeetingsMeetingIdEditRoute,
 }
