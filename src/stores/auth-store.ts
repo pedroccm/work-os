@@ -1,53 +1,67 @@
 import { create } from 'zustand'
-import { getCookie, setCookie, removeCookie } from '@/lib/cookies'
-
-const ACCESS_TOKEN = 'thisisjustarandomstring'
-
-interface AuthUser {
-  accountNo: string
-  email: string
-  role: string[]
-  exp: number
-}
+import { User } from '@supabase/supabase-js'
+import { supabase } from '@/lib/supabase'
 
 interface AuthState {
-  auth: {
-    user: AuthUser | null
-    setUser: (user: AuthUser | null) => void
-    accessToken: string
-    setAccessToken: (accessToken: string) => void
-    resetAccessToken: () => void
-    reset: () => void
-  }
+  user: User | null
+  loading: boolean
+  setUser: (user: User | null) => void
+  setLoading: (loading: boolean) => void
+  signIn: (email: string, password: string) => Promise<any>
+  signUp: (email: string, password: string) => Promise<any>
+  signOut: () => Promise<void>
+  resetPassword: (email: string) => Promise<any>
+  checkAuth: () => Promise<void>
 }
 
-export const useAuthStore = create<AuthState>()((set) => {
-  const cookieState = getCookie(ACCESS_TOKEN)
-  const initToken = cookieState ? JSON.parse(cookieState) : ''
-  return {
-    auth: {
-      user: null,
-      setUser: (user) =>
-        set((state) => ({ ...state, auth: { ...state.auth, user } })),
-      accessToken: initToken,
-      setAccessToken: (accessToken) =>
-        set((state) => {
-          setCookie(ACCESS_TOKEN, JSON.stringify(accessToken))
-          return { ...state, auth: { ...state.auth, accessToken } }
-        }),
-      resetAccessToken: () =>
-        set((state) => {
-          removeCookie(ACCESS_TOKEN)
-          return { ...state, auth: { ...state.auth, accessToken: '' } }
-        }),
-      reset: () =>
-        set((state) => {
-          removeCookie(ACCESS_TOKEN)
-          return {
-            ...state,
-            auth: { ...state.auth, user: null, accessToken: '' },
-          }
-        }),
-    },
+export const useAuthStore = create<AuthState>()((set) => ({
+  user: null,
+  loading: true,
+  setUser: (user) => set({ user }),
+  setLoading: (loading) => set({ loading }),
+
+  signIn: async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+    if (error) throw error
+    set({ user: data.user })
+    return data
+  },
+
+  signUp: async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    })
+    if (error) throw error
+    set({ user: data.user })
+    return data
+  },
+
+  signOut: async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) throw error
+    set({ user: null })
+  },
+
+  resetPassword: async (email: string) => {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    })
+    if (error) throw error
+    return data
+  },
+
+  checkAuth: async () => {
+    set({ loading: true })
+    const { data: { session } } = await supabase.auth.getSession()
+    set({ user: session?.user ?? null, loading: false })
   }
+}))
+
+// Initialize auth listener
+supabase.auth.onAuthStateChange((_event, session) => {
+  useAuthStore.getState().setUser(session?.user ?? null)
 })

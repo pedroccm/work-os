@@ -1,4 +1,4 @@
-import { useSearch, Link } from '@tanstack/react-router'
+import { useSearch } from '@tanstack/react-router'
 import {
   Card,
   CardContent,
@@ -17,24 +17,24 @@ export function SignIn() {
     <AuthLayout>
       <Card className='gap-4'>
         <CardHeader>
-          <CardTitle className='text-lg tracking-tight'>Sign in</CardTitle>
+          <CardTitle className='text-lg tracking-tight'>Entrar</CardTitle>
           <CardDescription>
-            Enter your email and password below to <br />
-            log into your account
+            Digite seu email e senha para <br />
+            acessar sua conta
           </CardDescription>
         </CardHeader>
         <CardContent>
           <UserAuthForm redirectTo={redirect} />
         </CardContent>
         <CardFooter>
-          <p className='text-muted-foreground text-center text-sm'>
-            Don't have an account?{' '}
-            <Link
-              to='/sign-up'
+          <p className='text-muted-foreground px-8 text-center text-sm'>
+            Não tem uma conta ainda?{' '}
+            <a
+              href='/sign-up'
               className='hover:text-primary underline underline-offset-4 font-medium'
             >
-              Sign up
-            </Link>
+              Cadastre-se aqui
+            </a>
           </p>
         </CardFooter>
       </Card>

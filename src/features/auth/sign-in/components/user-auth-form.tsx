@@ -7,7 +7,6 @@ import { Loader2, LogIn } from 'lucide-react'
 import { toast } from 'sonner'
 import { useAuthStore } from '@/stores/auth-store'
 import { cn } from '@/lib/utils'
-import { signInUser } from '@/lib/supabase'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -41,7 +40,7 @@ export function UserAuthForm({
 }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
-  const { auth } = useAuthStore()
+  const { signIn } = useAuthStore()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,36 +54,15 @@ export function UserAuthForm({
     setIsLoading(true)
 
     try {
-      const result = await signInUser(data.email, data.password)
+      await signIn(data.email, data.password)
 
-      if (result.success) {
-        const user = result.user!
+      // Redirect to the stored location or default to dashboard
+      const targetPath = redirectTo || '/'
+      navigate({ to: targetPath, replace: true })
 
-        // Set user and access token in store
-        const userData = {
-          accountNo: user.id,
-          email: user.email!,
-          role: ['user'],
-          exp: Date.now() + 24 * 60 * 60 * 1000,
-        }
-
-        auth.setUser(userData)
-        auth.setAccessToken(result.session!.access_token)
-
-        toast.success(`Welcome back, ${user.email}!`)
-
-        // Redirect to the stored location or default to dashboard
-        const targetPath = redirectTo || '/'
-        navigate({ to: targetPath, replace: true })
-      } else {
-        toast.error('Erro ao fazer login', {
-          description: result.error,
-        })
-      }
+      toast.success(`Welcome back, ${data.email}!`)
     } catch (error) {
-      toast.error('Erro inesperado', {
-        description: 'Ocorreu um erro ao fazer login. Tente novamente.',
-      })
+      toast.error(error instanceof Error ? error.message : 'Failed to sign in')
     } finally {
       setIsLoading(false)
     }
@@ -104,7 +82,7 @@ export function UserAuthForm({
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder='name@example.com' {...field} />
+                <Input placeholder='seu@email.com' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -115,7 +93,7 @@ export function UserAuthForm({
           name='password'
           render={({ field }) => (
             <FormItem className='relative'>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Senha</FormLabel>
               <FormControl>
                 <PasswordInput placeholder='********' {...field} />
               </FormControl>
@@ -124,15 +102,16 @@ export function UserAuthForm({
                 to='/forgot-password'
                 className='text-muted-foreground absolute end-0 -top-0.5 text-sm font-medium hover:opacity-75'
               >
-                Forgot password?
+                Esqueceu a senha?
               </Link>
             </FormItem>
           )}
         />
         <Button className='mt-2' disabled={isLoading}>
           {isLoading ? <Loader2 className='animate-spin' /> : <LogIn />}
-          Sign in
+          Entrar
         </Button>
+
       </form>
     </Form>
   )
