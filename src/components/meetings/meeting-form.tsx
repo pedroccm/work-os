@@ -44,6 +44,7 @@ const meetingSchema = z.object({
   hora_fim: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Formato inválido (HH:MM)"),
   video_youtube: z.string().url("URL inválida").optional().or(z.literal("")),
   video_youtube_id: z.string().optional(),
+  resumo: z.string().optional(),
   transcript: z.string().optional(),
   status: z.enum(["planejada", "em_andamento", "finalizada", "cancelada"]),
 });
@@ -69,6 +70,7 @@ export function MeetingForm({ meeting }: MeetingFormProps) {
       hora_fim: meeting?.hora_fim || "",
       video_youtube: meeting?.video_youtube || "",
       video_youtube_id: meeting?.video_youtube_id || "",
+      resumo: meeting?.resumo || "",
       transcript: meeting?.transcript || "",
       status: meeting?.status || "planejada",
     },
@@ -249,6 +251,24 @@ export function MeetingForm({ meeting }: MeetingFormProps) {
               <FormDescription>
                 Link do vídeo da reunião no YouTube (opcional)
               </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="resumo"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Resumo</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Resumo da reunião (opcional)"
+                  className="resize-none min-h-[100px]"
+                  {...field}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
