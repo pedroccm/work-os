@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Plus, Video, Calendar, Clock, SquarePen, Trash2, Search } from "lucide-react";
+import { Plus, Calendar, Clock, SquarePen, Trash2, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,7 +12,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import { useMeetings } from "@/hooks/use-meetings";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -74,16 +73,16 @@ function MeetingsPage() {
                   <TableHead>Nome</TableHead>
                   <TableHead>Data</TableHead>
                   <TableHead>Horário</TableHead>
-                  <TableHead>Vídeo</TableHead>
-                  <TableHead>Transcrição</TableHead>
                   <TableHead className="text-right">Ações</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredMeetings?.map((meeting) => (
                   <TableRow key={meeting.id}>
-                    <TableCell className="font-medium">
-                      {meeting.nome}
+                    <TableCell className="font-medium max-w-md">
+                      <div className="truncate" title={meeting.nome}>
+                        {meeting.nome}
+                      </div>
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center">
@@ -96,23 +95,6 @@ function MeetingsPage() {
                         <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
                         {meeting.hora_inicio}
                       </div>
-                    </TableCell>
-                    <TableCell>
-                      {meeting.video_youtube && (
-                        <a
-                          href={meeting.video_youtube}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:underline"
-                        >
-                          <Video className="h-4 w-4" />
-                        </a>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      {meeting.transcript && (
-                        <Badge variant="outline">Disponível</Badge>
-                      )}
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-2">
