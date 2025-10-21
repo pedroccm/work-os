@@ -19,36 +19,21 @@ export function SignUp() {
             Create an account
           </CardTitle>
           <CardDescription>
-            Enter your email and password to create an account. <br />
-            Already have an account?{' '}
-            <Link
-              to='/sign-in'
-              className='hover:text-primary underline underline-offset-4'
-            >
-              Sign In
-            </Link>
+            Enter your information below to create an account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <SignUpForm />
         </CardContent>
         <CardFooter>
-          <p className='text-muted-foreground px-8 text-center text-sm'>
-            By creating an account, you agree to our{' '}
-            <a
-              href='/terms'
-              className='hover:text-primary underline underline-offset-4'
+          <p className='text-muted-foreground text-center text-sm'>
+            Already have an account?{' '}
+            <Link
+              to='/sign-in'
+              className='hover:text-primary underline underline-offset-4 font-medium'
             >
-              Terms of Service
-            </a>{' '}
-            and{' '}
-            <a
-              href='/privacy'
-              className='hover:text-primary underline underline-offset-4'
-            >
-              Privacy Policy
-            </a>
-            .
+              Sign in
+            </Link>
           </p>
         </CardFooter>
       </Card>
